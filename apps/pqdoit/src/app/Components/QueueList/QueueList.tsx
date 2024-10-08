@@ -13,14 +13,14 @@ export const QueueList: React.FC = () => {
 
   return (
     <div>
-      <Grid2 container direction={'column'} gap={10}>
+      <Grid2 container direction={'column'} gap={5}>
         {queues.map((i) => (
           <>
             <QueueWrapper num={i.id} />
             <Divider />
           </>
         ))}
-        <Button onClick={addQueue}>
+        <Button onClick={addQueue} fullWidth>
           <AddCircleIcon />
         </Button>
       </Grid2>
