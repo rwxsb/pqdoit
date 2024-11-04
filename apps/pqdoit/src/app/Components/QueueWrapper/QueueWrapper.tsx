@@ -1,10 +1,19 @@
-import { Container } from '@mui/material';
+import { Container, Divider, Grid2, TextField } from '@mui/material';
 import React from 'react';
+import { Queue } from '../Queue/Queue';
+import { UniqueIdentifier } from '@dnd-kit/core';
 
 interface QueueWrapperProps {
-  num: number;
+  id: UniqueIdentifier;
 }
 
-export const QueueWrapper: React.FC<QueueWrapperProps> = ({ num }) => {
-  return <Container>{num}</Container>;
+export const QueueWrapper: React.FC<QueueWrapperProps> = ({ id }) => {
+  return (
+    <Grid2 container gap={1} direction={'column'}>
+      <Grid2 maxWidth={'20%'}>
+        <TextField size="small" />
+      </Grid2>
+      <Queue id={id} />
+    </Grid2>
+  );
 };
