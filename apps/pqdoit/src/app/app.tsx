@@ -3,18 +3,19 @@ import { Container, Grid, Grid2 } from '@mui/material';
 import styles from './app.module.scss';
 import { QueueList } from './Components/QueueList/QueueList';
 import { Backlog } from './Components/Backlog/Backlog';
+import { DndContext } from '@dnd-kit/core';
+import { StickyComponent } from './Components/Sticky/Sticky';
+import { createStore } from './createStore';
+import { Provider } from 'react-redux';
+import { Wrapper } from './Components/Wrapper/Wrapper';
 
 export function App() {
+  const store = createStore();
   return (
     <div>
-      <Grid2 container direction={'row'} justifyContent={'space-between'}>
-        <Grid2 size={4}>
-          <Backlog />
-        </Grid2>
-        <Grid2 size={8}>
-          <QueueList />
-        </Grid2>
-      </Grid2>
+      <Provider store={store}>
+        <Wrapper />
+      </Provider>
     </div>
   );
 }
