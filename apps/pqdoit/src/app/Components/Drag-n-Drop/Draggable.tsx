@@ -5,11 +5,17 @@ import { ReactJSX } from '@emotion/react/types/jsx-namespace';
 interface IDraggableProps {
   id: UniqueIdentifier;
   children: ReactJSX.Element;
+  disabled?: boolean;
 }
 
-export const Draggable: React.FC<IDraggableProps> = ({ id, children }) => {
+export const Draggable: React.FC<IDraggableProps> = ({
+  id,
+  children,
+  disabled = false,
+}) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
+    disabled,
   });
   const style = transform
     ? {
@@ -19,7 +25,12 @@ export const Draggable: React.FC<IDraggableProps> = ({ id, children }) => {
     : undefined;
 
   return (
-    <div style={style} ref={setNodeRef} {...listeners} {...attributes}>
+    <div
+      style={style}
+      ref={setNodeRef}
+      {...(!disabled ? listeners : {})}
+      {...(!disabled ? attributes : {})}
+    >
       {children}
     </div>
   );

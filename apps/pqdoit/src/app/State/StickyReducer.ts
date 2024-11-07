@@ -20,6 +20,7 @@ export interface IState {
 export interface Sticky {
   id: UniqueIdentifier;
   parent: UniqueIdentifier;
+  text: string;
 }
 
 export interface IStickyState extends IState {
@@ -51,21 +52,41 @@ export const stickyReducer = (
     case StickyActionTypes.SET_PARENT:
       return {
         ...state,
-        stickies: findAndSetParent(state.stickies, action.payload),
+        stickies: findAndSetKey(
+          state.stickies,
+          { keyName: 'parent', valueName: 'parentId' },
+          action.payload
+        ),
+      };
+    case StickyActionTypes.SET_TEXT:
+      return {
+        ...state,
+        stickies: findAndSetKey(
+          state.stickies,
+          {
+            keyName: 'text',
+            valueName: 'text',
+          },
+          action.payload
+        ),
       };
     default:
       return state;
   }
 };
 
-const findAndSetParent = (
+const findAndSetKey = (
   stickies: Sticky[],
+  prop: { keyName: string; valueName: string },
   payload:
     | {
         id: UniqueIdentifier;
         parentId: UniqueIdentifier;
       }
-    | undefined
+    | {
+        id: UniqueIdentifier;
+        text: string;
+      }
 ): Sticky[] => {
   return stickies.reduce((acc: Sticky[], current: Sticky) => {
     if (current.id === payload?.id) {
@@ -73,7 +94,7 @@ const findAndSetParent = (
         ...acc,
         {
           ...current,
-          parent: payload?.parentId,
+          [prop.keyName]: payload[prop.valueName],
         },
       ];
     }

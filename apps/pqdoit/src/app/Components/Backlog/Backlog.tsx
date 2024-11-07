@@ -48,7 +48,11 @@ export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
         >
           {stickies.map((sticky, index) =>
             sticky.parent === id ? (
-              <StickyComponent key={`backlog-item-${index}`} id={sticky.id} />
+              <StickyComponent
+                key={`backlog-item-${index}`}
+                id={sticky.id}
+                text={sticky.text}
+              />
             ) : null
           )}
         </Grid2>
