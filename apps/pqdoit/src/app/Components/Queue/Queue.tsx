@@ -20,7 +20,9 @@ export const Queue: React.FC<IQueueProps> = ({ id }) => {
     <Droppable id={id}>
       <Stack direction={'row'} spacing={1} height={'13em'}>
         {stickies.map((sticky) =>
-          sticky.parent === id ? <StickyComponent id={sticky.id} /> : null
+          sticky.parent === id ? (
+            <StickyComponent id={sticky.id} text={sticky.text} />
+          ) : null
         )}
       </Stack>
     </Droppable>
