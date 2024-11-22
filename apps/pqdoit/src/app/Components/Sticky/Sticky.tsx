@@ -4,6 +4,7 @@ import { UniqueIdentifier } from '@dnd-kit/core';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setText } from '../../State/StickyActions';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 
 export const StickyColors: string[] = [
   '#FFA', // Original pastel yellow
