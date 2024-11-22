@@ -1,19 +1,8 @@
-import { AddCard, AddCircle } from '@mui/icons-material';
-import {
-  Button,
-  Card,
-  Container,
-  Grid2,
-  Input,
-  TextareaAutosize,
-  TextField,
-} from '@mui/material';
-import { useState } from 'react';
+import { AddCircle } from '@mui/icons-material';
+import { Button, Grid2 } from '@mui/material';
 import { Droppable } from '../Drag-n-Drop/Droppable';
-import { StickyComponent } from '../Sticky/Sticky';
+import { StickyColors, StickyComponent } from '../Sticky/Sticky';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { IWrappedSticky } from '../Queue/Queue';
-import { Sticky } from '../../State/StickyReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from '../../createStore';
 import { addSticky } from '../../State/StickyActions';
@@ -28,7 +17,8 @@ export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
   const dispatch = useDispatch();
 
   const addCard = () => {
-    dispatch(addSticky({ parent: id, id: uuidv4() }));
+    const color = StickyColors[Math.floor(Math.random() * StickyColors.length)];
+    dispatch(addSticky({ parent: id, id: uuidv4(), text: '', color: color }));
   };
 
   return (
@@ -52,6 +42,7 @@ export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
                 key={`backlog-item-${index}`}
                 id={sticky.id}
                 text={sticky.text}
+                color={sticky.color}
               />
             ) : null
           )}

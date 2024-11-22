@@ -21,6 +21,7 @@ export interface Sticky {
   id: UniqueIdentifier;
   parent: UniqueIdentifier;
   text: string;
+  color: string;
 }
 
 export interface IStickyState extends IState {

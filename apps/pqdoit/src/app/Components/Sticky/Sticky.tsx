@@ -1,27 +1,33 @@
-import { Card, Input, TextField } from '@mui/material';
+import { Grid2, TextField } from '@mui/material';
 import { Draggable } from '../Drag-n-Drop/Draggable';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setText } from '../../State/StickyActions';
+
+export const StickyColors: string[] = [
+  '#FFA', // Original pastel yellow
+  '#FFD8A8', // Soft pastel orange
+  '#FFC1D3', // Soft pastel pink
+  '#D8F7C5', // Soft pastel green
+  '#C7E8F7', // Soft pastel blue
+];
 
 export interface IStickyProps {
   id: UniqueIdentifier;
   text: string;
+  color: string;
 }
 
-export const StickyComponent: React.FC<IStickyProps> = ({ id, text }) => {
+export const StickyComponent: React.FC<IStickyProps> = ({
+  id,
+  text,
+  color,
+}) => {
   const [value, setValue] = useState(text);
-  const [isEditable, setIsEditable] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    event.altKey && setIsEditable(true); // Enables edit mode
-  };
-
   const handleBlur = () => {
-    setIsEditable(false);
     if (text !== value) {
       dispatch(setText({ id: id, text: value }));
     }
@@ -32,31 +38,25 @@ export const StickyComponent: React.FC<IStickyProps> = ({ id, text }) => {
     setValue(event.target.value);
   };
 
-  useEffect(() => {
-    if (isEditable && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isEditable]);
-
   return (
-    <Draggable id={id} disabled={isEditable}>
-      {/*<Card style={{ minWidth: '10em', minHeight: '10em', margin: '0.5em' }}>*/}
-      <TextField
-        multiline
-        fullWidth
-        type="text"
-        style={{
-          minWidth: '10em',
-          maxHeight: '10em',
-          margin: '0.5em',
-          boxSizing: 'border-box',
-        }}
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
-        inputRef={inputRef}
-      />
+    <Draggable
+      id={id}
+      handle
+      passedStyle={{ background: color, borderRadius: '2%' }}
+    >
+      <Grid2 container direction={'row'}>
+        <TextField
+          multiline
+          fullWidth
+          type="text"
+          style={{
+            margin: '0.5em',
+          }}
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </Grid2>
     </Draggable>
   );
 };
