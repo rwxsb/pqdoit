@@ -1,7 +1,6 @@
 import React from 'react';
 import { UniqueIdentifier, useDroppable } from '@dnd-kit/core';
 import { ReactJSX } from '@emotion/react/types/jsx-namespace';
-import { borderColor, borderRadius } from '@mui/system';
 
 interface IDroppable {
   id: UniqueIdentifier;
