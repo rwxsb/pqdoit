@@ -15,11 +15,14 @@ export const Wrapper: React.FC = () => {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <Grid2 container direction={'row'} justifyContent={'space-between'}>
-        <Grid2 size={4}>
+        <Grid2 size={2}>
           <Backlog id="backlog" />
         </Grid2>
-        <Grid2 size={8}>
+        <Grid2 size={7}>
           <QueueList />
+        </Grid2>
+        <Grid2 size={2}>
+          <Backlog id="done" />
         </Grid2>
       </Grid2>
     </DndContext>

@@ -3,6 +3,7 @@ import { UniqueIdentifier, useDraggable } from '@dnd-kit/core';
 import { ReactJSX } from '@emotion/react/types/jsx-namespace';
 import { Card, Grid2 } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 
 interface IDraggableProps {
   id: UniqueIdentifier;

@@ -1,5 +1,5 @@
 import { AddCircle } from '@mui/icons-material';
-import { Button, Grid2 } from '@mui/material';
+import { Button, Grid2, Paper } from '@mui/material';
 import { Droppable } from '../Drag-n-Drop/Droppable';
 import { StickyColors, StickyComponent } from '../Sticky/Sticky';
 import { UniqueIdentifier } from '@dnd-kit/core';
