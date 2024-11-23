@@ -1,8 +1,5 @@
 import { UniqueIdentifier } from '@dnd-kit/core';
-import IAction from './Actions';
-import { Action } from '@reduxjs/toolkit';
 import { IStickyAction, StickyActionTypes } from './StickyActions';
-import { StickyComponent } from '../Components/Sticky/Sticky';
 
 export enum Status {
   None = 'None',

@@ -1,5 +1,5 @@
 import { AddCircle } from '@mui/icons-material';
-import { Button, Grid2, Paper } from '@mui/material';
+import { Button, Grid2 } from '@mui/material';
 import { Droppable } from '../Drag-n-Drop/Droppable';
 import { StickyColors, StickyComponent } from '../Sticky/Sticky';
 import { UniqueIdentifier } from '@dnd-kit/core';
@@ -10,9 +10,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface IBacklogProps {
   id: UniqueIdentifier;
+  actionable?: boolean;
 }
 
-export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
+export const Backlog: React.FC<IBacklogProps> = ({ id, actionable = true }) => {
   const stickies = useSelector((state: IAppState) => state.sticky.stickies);
   const dispatch = useDispatch();
 
@@ -23,11 +24,13 @@ export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
 
   return (
     <Grid2 container justifyContent={'space-around'} direction={'column'}>
-      <Grid2>
-        <Button onClick={addCard} fullWidth>
-          <AddCircle fontSize="large" />
-        </Button>
-      </Grid2>
+      {actionable && (
+        <Grid2>
+          <Button onClick={addCard} fullWidth>
+            <AddCircle fontSize="large" />
+          </Button>
+        </Grid2>
+      )}
       <Droppable id={id}>
         <Grid2
           maxWidth={'90%'}
@@ -43,6 +46,8 @@ export const Backlog: React.FC<IBacklogProps> = ({ id }) => {
                 id={sticky.id}
                 text={sticky.text}
                 color={sticky.color}
+                actionable={actionable}
+                disabled={!actionable}
               />
             ) : null
           )}

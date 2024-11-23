@@ -1,4 +1,4 @@
-import { Paper, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { Droppable } from '../Drag-n-Drop/Droppable';
 import { IStickyProps, StickyComponent } from '../Sticky/Sticky';
 import { UniqueIdentifier } from '@dnd-kit/core';
