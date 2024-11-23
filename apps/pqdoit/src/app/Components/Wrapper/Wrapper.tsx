@@ -2,7 +2,7 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { Grid2 } from '@mui/material';
 import { Backlog } from '../Backlog/Backlog';
 import { QueueList } from '../QueueList/QueueList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setParent } from '../../State/StickyActions';
 
 export const Wrapper: React.FC = () => {
@@ -14,7 +14,12 @@ export const Wrapper: React.FC = () => {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <Grid2 container direction={'row'} justifyContent={'space-between'}>
+      <Grid2
+        container
+        direction={'row'}
+        justifyContent={'space-between'}
+        flexWrap={'wrap'}
+      >
         <Grid2 size={2}>
           <Backlog id="backlog" />
         </Grid2>
@@ -22,7 +27,7 @@ export const Wrapper: React.FC = () => {
           <QueueList />
         </Grid2>
         <Grid2 size={2}>
-          <Backlog id="done" />
+          <Backlog id="done" actionable={false} />
         </Grid2>
       </Grid2>
     </DndContext>

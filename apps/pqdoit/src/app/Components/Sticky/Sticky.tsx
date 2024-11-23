@@ -1,10 +1,10 @@
-import { Grid2, TextField } from '@mui/material';
+import { CardActions, Grid2, TextField } from '@mui/material';
 import { Draggable } from '../Drag-n-Drop/Draggable';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setText } from '../../State/StickyActions';
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import { setParent, setText } from '../../State/StickyActions';
+import CheckIcon from '@mui/icons-material/Check';
 
 export const StickyColors: string[] = [
   '#FFA', // Original pastel yellow
@@ -18,12 +18,16 @@ export interface IStickyProps {
   id: UniqueIdentifier;
   text: string;
   color: string;
+  disabled?: boolean;
+  actionable?: boolean;
 }
 
 export const StickyComponent: React.FC<IStickyProps> = ({
   id,
   text,
   color,
+  disabled = false,
+  actionable = true,
 }) => {
   const [value, setValue] = useState(text);
   const dispatch = useDispatch();
@@ -39,6 +43,10 @@ export const StickyComponent: React.FC<IStickyProps> = ({
     setValue(event.target.value);
   };
 
+  const handleCompleted = () => {
+    dispatch(setParent({ id: id, parentId: 'done' }));
+  };
+
   return (
     <Draggable
       id={id}
@@ -47,6 +55,7 @@ export const StickyComponent: React.FC<IStickyProps> = ({
     >
       <Grid2 container direction={'row'}>
         <TextField
+          disabled={disabled}
           multiline
           fullWidth
           type="text"
@@ -57,6 +66,11 @@ export const StickyComponent: React.FC<IStickyProps> = ({
           onChange={handleChange}
           onBlur={handleBlur}
         />
+        {actionable && (
+          <CardActions>
+            <CheckIcon onClick={handleCompleted} />
+          </CardActions>
+        )}
       </Grid2>
     </Draggable>
   );

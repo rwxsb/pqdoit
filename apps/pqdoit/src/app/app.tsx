@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createStore } from './createStore';
 import { Provider } from 'react-redux';
 import { Wrapper } from './Components/Wrapper/Wrapper';
