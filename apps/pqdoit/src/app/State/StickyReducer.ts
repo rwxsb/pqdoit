@@ -1,18 +1,6 @@
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { IStickyAction, StickyActionTypes } from './StickyActions';
-
-export enum Status {
-  None = 'None',
-  Loading = 'Loading',
-  Successful = 'Successful',
-  Failed = 'Failed',
-}
-
-export interface IState {
-  status: Status;
-  isError: boolean;
-  error: string;
-}
+import { IState, Status } from './Common';
 
 export interface Sticky {
   id: UniqueIdentifier;

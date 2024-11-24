@@ -18,7 +18,7 @@ export const Queue: React.FC<IQueueProps> = ({ id }) => {
   const stickies = useSelector((state: IAppState) => state.sticky.stickies);
   return (
     <Droppable id={id}>
-      <Stack direction={'row'} spacing={1} minHeight={'3em'}>
+      <Stack direction={'row'} spacing={1} minHeight={'5em'}>
         {stickies.map((sticky) =>
           sticky.parent === id ? (
             <StickyComponent

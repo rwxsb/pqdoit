@@ -5,7 +5,7 @@ import { Wrapper } from './Components/Wrapper/Wrapper';
 export function App() {
   const store = createStore();
   return (
-    <div style={{ background: '#F5F5F5', height: '99vh' }}>
+    <div>
       <Provider store={store}>
         <Wrapper />
       </Provider>
