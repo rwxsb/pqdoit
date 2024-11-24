@@ -5,16 +5,13 @@ import {
   compose,
   createStore as createReduxStore,
 } from '@reduxjs/toolkit';
-import {
-  IState,
-  IStickyState,
-  Sticky,
-  stickyReducer,
-} from './State/StickyReducer';
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { IStickyState, stickyReducer } from './State/StickyReducer';
+import { createEpicMiddleware } from 'redux-observable';
+import { IQueueState, queueReducer } from './State/QueueReducer';
 
 export interface IAppState {
   sticky: IStickyState;
+  queue: IQueueState;
 }
 
 export const createStore = () => {
@@ -24,6 +21,7 @@ export const createStore = () => {
 
   const rootReducer = combineReducers<IAppState>({
     sticky: stickyReducer,
+    queue: queueReducer,
   });
 
   //const rootEpic = combineEpics<Action, Action, IAppState>();
