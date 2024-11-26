@@ -25,14 +25,8 @@ export const Sortable: React.FC<ISortableProps> = ({
   };
 
   return (
-    <li
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...(handle ? {} : listeners)}
-    >
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {children}
-      {handle ? <DragHandleIcon {...(handle ? listeners : {})} /> : null}
-    </li>
+    </div>
   );
 };

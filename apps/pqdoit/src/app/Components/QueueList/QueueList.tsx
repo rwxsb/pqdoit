@@ -9,6 +9,7 @@ import { addQueue, swapItems } from '../../State/QueueActions';
 import { SortableContext } from '@dnd-kit/sortable';
 import { Sortable } from '../Drag-n-Drop/Sortable';
 import { DragEndEvent } from '@dnd-kit/core';
+import { useEffect, useState } from 'react';
 
 export const QueueList: React.FC = () => {
   const queues = useSelector((state: IAppState) => state.queue.queues);
@@ -18,24 +19,11 @@ export const QueueList: React.FC = () => {
     dispatch(addQueue({ id: uuidv4(), title: '' }));
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (active.id !== over?.id) {
-      const oldIndex = queues.findIndex((item) => item.id === active.id);
-      const newIndex = queues.findIndex((item) => item.id === over?.id);
-      dispatch(swapItems({ item1: oldIndex, item2: newIndex }));
-      console.log('YABA DABA DUU');
-    }
-  };
-
-  console.log('DEBUG - ', queues);
-
   return (
     <div>
       <Grid2 container direction={'column'} gap={5}>
         {queues.map((i, index) => (
           <>
-            {console.log('DEBUG -', i.title)}
             <QueueWrapper key={`queue-${index}`} id={i.id} title={i.title} />
             <Divider />
           </>

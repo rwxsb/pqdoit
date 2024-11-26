@@ -4,6 +4,8 @@ import { IStickyProps, StickyComponent } from '../Sticky/Sticky';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../createStore';
+import { SortableContext } from '@dnd-kit/sortable';
+import { Sortable } from '../Drag-n-Drop/Sortable';
 
 interface IQueueProps {
   id: UniqueIdentifier;
